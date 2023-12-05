@@ -1,0 +1,12 @@
+com\anast\lms\controller\UserController.class
+com\anast\lms\generated\jooq\tables\pojos\UserPassword.class
+com\anast\lms\generated\jooq\Tables.class
+com\anast\lms\model\ErrorResponse.class
+com\anast\lms\generated\jooq\tables\records\UserPasswordRecord.class
+com\anast\lms\generated\jooq\LmsUser.class
+com\anast\lms\configuration\DaoConfig.class
+com\anast\lms\configuration\SwaggerConfig.class
+com\anast\lms\generated\jooq\tables\UserPassword.class
+com\anast\lms\service\UserService.class
+com\anast\lms\UserServiceApplication.class
+com\anast\lms\generated\jooq\DefaultCatalog.class
