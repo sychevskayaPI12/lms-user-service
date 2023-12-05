@@ -2,6 +2,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <include file="" relativeToChangelogFile="true"/>
+    <include file="001_create.sql" relativeToChangelogFile="true"/>
+    <include file="002_create_user_role.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
