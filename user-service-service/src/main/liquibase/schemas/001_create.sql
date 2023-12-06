@@ -34,4 +34,10 @@ VALUES('debug', 'Дебаг Дебагович', 'debug@mail.ru');
 
 INSERT INTO lms_user.user_password(login, password) VALUES ('debug', 'debug');
 
+alter table lms_user.user_password drop constraint user_password_id_pk;
+alter table lms_user.user_password drop column id;
 
+insert into lms_user.role values ('STUDENT', 'Обучающийся');
+insert into lms_user.role values ('TEACHER', 'Преподаватель');
+insert into lms_user.user_role values ('debug', 'STUDENT');
+insert into lms_user.user_role values ('debug', 'TEACHER');

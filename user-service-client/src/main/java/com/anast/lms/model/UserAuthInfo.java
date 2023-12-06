@@ -2,6 +2,8 @@ package com.anast.lms.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class UserAuthInfo {
 
     @JsonProperty("login")
@@ -10,11 +12,15 @@ public class UserAuthInfo {
     @JsonProperty("password")
     private String  password;
 
+    @JsonProperty("roles")
+    private List<String> roles;
+
     public UserAuthInfo() {}
 
-    public UserAuthInfo(String login, String password) {
+    public UserAuthInfo(String login, String password, List<String> roles) {
         this.login = login;
         this.password = password;
+        this.roles = roles;
     }
 
     public String getLogin() {
@@ -33,4 +39,11 @@ public class UserAuthInfo {
         this.password = password;
     }
 
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
 }

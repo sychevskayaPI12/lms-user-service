@@ -1,30 +1,26 @@
 package com.anast.lms.service;
 
-import com.anast.lms.generated.jooq.Tables;
-import com.anast.lms.generated.jooq.tables.records.UserPasswordRecord;
 import com.anast.lms.model.UserAuthInfo;
-import org.jooq.DSLContext;
+import com.anast.lms.model.UserDetail;
+import com.anast.lms.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserService {
 
-    private final DSLContext context;
+    private final UserRepository userRepository;
 
 
-    public UserService(DSLContext context) {
-        this.context = context;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public UserAuthInfo getUserAuthInfoByLogin(String login) {
-        return mapUserAuthInfoRecord(context.selectFrom(Tables.USER_PASSWORD).where(Tables.USER_PASSWORD.LOGIN.eq(login))
-                .fetchAny());
+        return userRepository.getUserAuthInfo(login);
     }
 
-    private UserAuthInfo mapUserAuthInfoRecord(UserPasswordRecord rec) {
-        return new UserAuthInfo(
-                rec.getLogin(),
-                rec.getPassword()
-        );
+    public UserDetail getUserDetail(String login) {
+        return userRepository.getUserDetail(login);
     }
+
 }

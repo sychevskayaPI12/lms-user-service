@@ -2,6 +2,7 @@ package com.anast.lms.controller;
 
 import com.anast.lms.client.UserRestService;
 import com.anast.lms.model.UserAuthInfo;
+import com.anast.lms.model.UserDetail;
 import com.anast.lms.service.UserService;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,5 +18,10 @@ public class UserController implements UserRestService {
     @Override
     public UserAuthInfo getUserAuthInfoByLogin(String login) {
         return userService.getUserAuthInfoByLogin(login);
+    }
+
+    @Override
+    public UserDetail getUserDetail(String login) {
+        return userService.getUserDetail(login);
     }
 }

@@ -213,7 +213,7 @@
                                         </generate>
                                         <database>
                                             <includes>
-                                                USER_PASSWORD
+                                                LMS_USER.*
                                             </includes>
                                             <name>org.jooq.meta.postgres.PostgresDatabase</name>
                                             <inputSchema>${build.jooq.datasource.schema}</inputSchema>
