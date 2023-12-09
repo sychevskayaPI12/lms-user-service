@@ -1,19 +1,13 @@
 package com.anast.lms.repository;
 
 import com.anast.lms.generated.jooq.Tables;
-import com.anast.lms.generated.jooq.tables.UserInfo;
-import com.anast.lms.generated.jooq.tables.UserRole;
 import com.anast.lms.generated.jooq.tables.records.UserInfoRecord;
 import com.anast.lms.generated.jooq.tables.records.UserPasswordRecord;
-import com.anast.lms.generated.jooq.tables.records.UserRoleRecord;
 import com.anast.lms.model.UserAuthInfo;
 import com.anast.lms.model.UserDetail;
 import org.jooq.DSLContext;
-import org.jooq.Record;
 import org.jooq.Result;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
 
 @Repository
 public class UserRepository {
