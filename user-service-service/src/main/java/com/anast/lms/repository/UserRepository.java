@@ -9,6 +9,8 @@ import org.jooq.DSLContext;
 import org.jooq.Result;
 import org.springframework.stereotype.Repository;
 
+import static com.anast.lms.generated.jooq.Tables.*;
+
 @Repository
 public class UserRepository {
 
@@ -34,9 +36,24 @@ public class UserRepository {
     }
 
     public UserDetail getUserDetail(String login) {
-        return context.selectFrom(Tables.USER_INFO)
-                .where(Tables.USER_INFO.LOGIN.eq(login))
+        return context.selectFrom(USER_INFO)
+                .where(USER_INFO.LOGIN.eq(login))
                 .fetchAny(this::mapUserDetail);
+    }
+
+    public void createUser(UserDetail userDetail) {
+        context.insertInto(USER_INFO)
+            .set(USER_INFO.LOGIN, userDetail.getLogin())
+            .set(USER_INFO.FULL_NAME, userDetail.getFullName())
+            .set(USER_INFO.MAIL, userDetail.getMail())
+            .execute();
+    }
+
+    public void insertUserAuthInfo(UserAuthInfo info) {
+        context.insertInto(USER_PASSWORD)
+                .set(USER_PASSWORD.LOGIN, info.getLogin())
+                .set(USER_PASSWORD.PASSWORD, info.getPassword())
+                .execute();
     }
 
     private UserAuthInfo mapUserAuthInfoRecord(UserPasswordRecord userPasswordRecord, Result roles) {

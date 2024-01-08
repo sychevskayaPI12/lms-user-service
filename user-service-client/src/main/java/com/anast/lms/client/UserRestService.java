@@ -2,9 +2,8 @@ package com.anast.lms.client;
 
 import com.anast.lms.model.UserAuthInfo;
 import com.anast.lms.model.UserDetail;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import com.anast.lms.model.UserRegisterRequest;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public interface UserRestService {
@@ -14,4 +13,7 @@ public interface UserRestService {
 
     @GetMapping("/user/{login}/detail")
     UserDetail getUserDetail(@PathVariable("login") String login);
+
+    @PostMapping("/user/register")
+    void registerNewUser(@RequestBody UserRegisterRequest registerRequest) throws Exception;
 }
