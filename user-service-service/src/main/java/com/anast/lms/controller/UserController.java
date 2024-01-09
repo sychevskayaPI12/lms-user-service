@@ -30,4 +30,9 @@ public class UserController implements UserRestService {
     public void registerNewUser(UserRegisterRequest registerRequest) throws Exception {
         userService.registerNewUser(registerRequest);
     }
+
+    @Override
+    public void deleteUser(String login) {
+        userService.deleteUser(login);
+    }
 }

@@ -16,4 +16,7 @@ public interface UserRestService {
 
     @PostMapping("/user/register")
     void registerNewUser(@RequestBody UserRegisterRequest registerRequest) throws Exception;
+
+    @GetMapping("/user/{login}/delete")
+    void deleteUser(@PathVariable("login") String login);
 }

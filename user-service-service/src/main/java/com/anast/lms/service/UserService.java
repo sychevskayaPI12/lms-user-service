@@ -37,4 +37,11 @@ public class UserService {
         userRepository.insertUserAuthInfo(registerRequest.getAuthInfo());
 
     }
+
+    @Transactional
+    public void deleteUser(String login) {
+        userRepository.deleteUserRoles(login);
+        userRepository.deleteUserPassword(login);
+        userRepository.deleteUser(login);
+    }
 }

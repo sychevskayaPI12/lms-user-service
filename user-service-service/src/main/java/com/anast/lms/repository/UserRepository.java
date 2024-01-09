@@ -9,6 +9,8 @@ import org.jooq.DSLContext;
 import org.jooq.Result;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 import static com.anast.lms.generated.jooq.Tables.*;
 
 @Repository
@@ -54,6 +56,33 @@ public class UserRepository {
                 .set(USER_PASSWORD.LOGIN, info.getLogin())
                 .set(USER_PASSWORD.PASSWORD, info.getPassword())
                 .execute();
+        insertUserRoles(info.getRoles(), info.getLogin());
+    }
+
+    public void insertUserRoles(List<String> roles, String login) {
+        for(String role : roles) {
+            context.insertInto(USER_ROLE)
+                    .set(USER_ROLE.LOGIN, login)
+                    .set(USER_ROLE.ROLE_CODE, role)
+                    .execute();
+        }
+    }
+
+    public void deleteUserRoles(String login) {
+        context.deleteFrom(USER_ROLE)
+        .where(USER_ROLE.LOGIN.eq(login))
+        .execute();
+    }
+
+    public void deleteUserPassword(String login) {
+        context.deleteFrom(USER_PASSWORD)
+                .where(USER_PASSWORD.LOGIN.eq(login))
+                .execute();
+    }
+
+    public void deleteUser(String login) {
+        context.deleteFrom(USER_INFO)
+                .where(USER_INFO.LOGIN.eq(login));
     }
 
     private UserAuthInfo mapUserAuthInfoRecord(UserPasswordRecord userPasswordRecord, Result roles) {
