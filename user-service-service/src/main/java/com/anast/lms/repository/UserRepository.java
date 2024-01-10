@@ -82,7 +82,8 @@ public class UserRepository {
 
     public void deleteUser(String login) {
         context.deleteFrom(USER_INFO)
-                .where(USER_INFO.LOGIN.eq(login));
+                .where(USER_INFO.LOGIN.eq(login))
+                .execute();
     }
 
     private UserAuthInfo mapUserAuthInfoRecord(UserPasswordRecord userPasswordRecord, Result roles) {
