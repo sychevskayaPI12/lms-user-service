@@ -19,4 +19,7 @@ public interface UserRestService {
 
     @GetMapping("/user/{login}/delete")
     void deleteUser(@PathVariable("login") String login);
+
+    @GetMapping("/user/{login}/confirm")
+    void confirmAccount(@PathVariable("login") String login);
 }

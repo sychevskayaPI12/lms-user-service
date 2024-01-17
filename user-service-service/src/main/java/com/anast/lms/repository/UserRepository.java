@@ -6,6 +6,7 @@ import com.anast.lms.generated.jooq.tables.records.UserPasswordRecord;
 import com.anast.lms.model.UserAuthInfo;
 import com.anast.lms.model.UserDetail;
 import org.jooq.DSLContext;
+import org.jooq.Record;
 import org.jooq.Result;
 import org.springframework.stereotype.Repository;
 
@@ -44,6 +45,10 @@ public class UserRepository {
     }
 
     public void createUser(UserDetail userDetail) {
+        context.insertInto(USER_ACCOUNT)
+                .set(USER_ACCOUNT.LOGIN, userDetail.getLogin())
+                .execute();
+
         context.insertInto(USER_INFO)
             .set(USER_INFO.LOGIN, userDetail.getLogin())
             .set(USER_INFO.FULL_NAME, userDetail.getFullName())
@@ -83,6 +88,23 @@ public class UserRepository {
     public void deleteUser(String login) {
         context.deleteFrom(USER_INFO)
                 .where(USER_INFO.LOGIN.eq(login))
+                .execute();
+        context.deleteFrom(USER_ACCOUNT)
+                .where(USER_ACCOUNT.LOGIN.eq(login))
+                .execute();
+    }
+
+    public boolean isConfirmedAccountPresent(String login) {
+        return context.selectFrom(USER_ACCOUNT)
+                .where(USER_ACCOUNT.LOGIN.eq(login)
+                .and(USER_ACCOUNT.CONFIRMED.eq(true)))
+                .stream().count() > 0;
+    }
+
+    public void confirmAccount(String login) {
+        context.update(USER_ACCOUNT)
+                .set(USER_ACCOUNT.CONFIRMED, true)
+                .where(USER_ACCOUNT.LOGIN.eq(login))
                 .execute();
     }
 

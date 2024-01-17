@@ -35,4 +35,9 @@ public class UserController implements UserRestService {
     public void deleteUser(String login) {
         userService.deleteUser(login);
     }
+
+    @Override
+    public void confirmAccount(String login) {
+        userService.confirmAccount(login);
+    }
 }

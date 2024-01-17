@@ -1,0 +1,1 @@
+alter table lms.lms_user.user_password drop constraint login_fk;

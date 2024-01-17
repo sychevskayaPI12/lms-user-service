@@ -17,7 +17,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public boolean checkIsConfirmedAccountPresent(String login) {
+        return userRepository.isConfirmedAccountPresent(login);
+    }
+
     public UserAuthInfo getUserAuthInfoByLogin(String login) {
+        if(!checkIsConfirmedAccountPresent(login)) {
+            return null;
+        }
         return userRepository.getUserAuthInfo(login);
     }
 
@@ -28,9 +35,8 @@ public class UserService {
     @Transactional
     public void registerNewUser(UserRegisterRequest registerRequest) throws Exception {
 
-        UserAuthInfo userAuthInfo = userRepository.getUserAuthInfo(registerRequest.getAuthInfo().getLogin());
-        if(userAuthInfo != null) {
-            throw new Exception(String.format("Пользователь с логином %s уже существует", userAuthInfo.getLogin()));
+        if(checkIsConfirmedAccountPresent(registerRequest.getAuthInfo().getLogin())) {
+            throw new Exception(String.format("Пользователь с логином %s уже существует", registerRequest.getAuthInfo().getLogin()));
         }
 
         userRepository.createUser(registerRequest.getUserDetail());
@@ -43,5 +49,9 @@ public class UserService {
         userRepository.deleteUserRoles(login);
         userRepository.deleteUserPassword(login);
         userRepository.deleteUser(login);
+    }
+
+    public void confirmAccount(String login) {
+        userRepository.confirmAccount(login);
     }
 }
